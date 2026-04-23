@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-dm: "DM Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-brand-accent: #f24a30;
+  --color-bg-dark: #0c0c0c;
+  --color-border-subtle: #262626;
+  --color-text-muted: #8c8c8c;
+}
+
+:root {
+  --color-bg: #fafafa;
+  --color-bg-card: #ffffff;
+  --color-accent: #ff442b;
+  --color-text-primary: #151414;
+  --color-text-secondary: #4f4a4a;
+  --color-border: #c4bfbf;
+  --color-footer-bg: #121111;
+  --color-white: #ffffff;
+}
+
+body {
+  background-color: var(--color-bg-dark);
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-brand-accent);
+  color: white;
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+}
+
+/* Hide scrollbar for clean look if desired, or just style it */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-subtle);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
