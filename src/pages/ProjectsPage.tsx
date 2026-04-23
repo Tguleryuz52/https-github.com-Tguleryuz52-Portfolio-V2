@@ -1,17 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Footer } from '../components/Footer';
 
 const projects = [
-  { imgSrc: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1600', year: '2024', title: 'Formula Vintage', desc: 'For Formula Vintage, we crafted a design that honors the rich heritage of classic cars while adding a modern twist. Combining timeless elegance with sleek, contemporary elements, we created an experience that appeals to both enthusiasts and newcomers, celebrating the past with a fresh perspective.', tags: ['Landing Page', 'Mobile App', 'Redesign'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&q=80&w=1600', year: '2024', title: 'Sprey Zest', desc: 'For Sprey Zest, we took a playful, bold approach to packaging and branding. Instead of following the typical fresh or clean aesthetic, we infused energy and personality into every detail, making the product stand out on shelves and bringing a burst of excitement to the consumer experience.', tags: ['Website Design', 'Branding'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=1600', year: '2020', title: 'Super Pro', desc: 'For Super-Pro, we redefined what it means to be professional. A tool built for modern achievers focusing on rapid scaling without losing the design fundamentals.', tags: ['Desktop App', 'Mobile App'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600', year: '2024', title: 'Architech Buildings', desc: 'We redefined the concept of modern living by creating a design that challenges conventional boundaries, turning purely functional spaces into artistic statements.', tags: ['Mobile App', 'Branding', 'Website Design'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1600', year: '2022', title: 'Posnen Gallery', desc: 'For the Posnen gallery campaign, we flipped the typical sports ad by focusing on character rather than performance. Elevating the human form to high art status.', tags: ['Desktop App', 'Branding'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1600', year: '2023', title: 'Fringe Sports', desc: 'For Fringe Sports, we broke away from the typical sports advertising mold, looking at the quirky side of athletic culture and bringing a retro-futuristic styling to the forefront.', tags: ['Desktop App', 'Entertainment', 'Branding'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1600', year: '2022', title: 'Lot and Coin', desc: 'For Lot-and-Coin, we created a brand identity that blends trust with excitement. Focusing on the thrill of the auction, keeping the digital facade as sleek and mysterious as possible.', tags: ['Mobile App', 'Branding'] }
+  { imgSrc: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1600', year: '2024', title: 'Formula Vintage', desc: 'For Formula Vintage, we crafted a design that honors the rich heritage of classic cars while adding a modern twist. Combining timeless elegance with sleek, contemporary elements, we created an experience that appeals to both enthusiasts and newcomers, celebrating the past with a fresh perspective.', tags: ['Landing Page', 'Mobile App', 'Redesign', 'UI/UX'] },
+  { imgSrc: 'https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&q=80&w=1600', year: '2024', title: 'Sprey Zest', desc: 'For Sprey Zest, we took a playful, bold approach to packaging and branding. Instead of following the typical fresh or clean aesthetic, we infused energy and personality into every detail, making the product stand out on shelves and bringing a burst of excitement to the consumer experience.', tags: ['Website Design', 'Branding', '3D Design'] },
+  { imgSrc: 'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=1600', year: '2020', title: 'Super Pro', desc: 'For Super-Pro, we redefined what it means to be professional. A tool built for modern achievers focusing on rapid scaling without losing the design fundamentals.', tags: ['Desktop App', 'Mobile App', 'UI/UX'] },
+  { imgSrc: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600', year: '2024', title: 'Architech Buildings', desc: 'We redefined the concept of modern living by creating a design that challenges conventional boundaries, turning purely functional spaces into artistic statements.', tags: ['Mobile App', 'Branding', 'Website Design', '3D Design'] },
+  { imgSrc: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1600', year: '2022', title: 'Posnen Gallery', desc: 'For the Posnen gallery campaign, we flipped the typical sports ad by focusing on character rather than performance. Elevating the human form to high art status.', tags: ['Desktop App', 'Branding', 'UI/UX'] },
+  { imgSrc: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1600', year: '2023', title: 'Fringe Sports', desc: 'For Fringe Sports, we broke away from the typical sports advertising mold, looking at the quirky side of athletic culture and bringing a retro-futuristic styling to the forefront.', tags: ['Desktop App', 'Entertainment', 'Branding', '3D Design'] },
+  { imgSrc: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1600', year: '2022', title: 'Lot and Coin', desc: 'For Lot-and-Coin, we created a brand identity that blends trust with excitement. Focusing on the thrill of the auction, keeping the digital facade as sleek and mysterious as possible.', tags: ['Mobile App', 'Branding', 'UI/UX'] }
 ];
 
 const oldProjects = [
@@ -26,6 +26,32 @@ const oldProjects = [
 
 export function ProjectsPage() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [scrollRange, setScrollRange] = useState(0);
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const allCategories = ['All', 'UI/UX', '3D Design', 'Branding', 'Mobile App', 'Desktop App', 'Landing Page'];
+
+  const filteredProjects = projects.filter(p => 
+    activeFilter === 'All' ? true : p.tags.includes(activeFilter)
+  );
+
+  useEffect(() => {
+    const updateScrollRange = () => {
+      if (trackRef.current) {
+        const scrollWidth = trackRef.current.scrollWidth;
+        const clientWidth = window.innerWidth;
+        const maxScroll = Math.min(0, -(scrollWidth - clientWidth));
+        setScrollRange(maxScroll);
+      }
+    };
+    
+    updateScrollRange();
+    setTimeout(updateScrollRange, 100);
+    
+    window.addEventListener('resize', updateScrollRange);
+    return () => window.removeEventListener('resize', updateScrollRange);
+  }, [filteredProjects]);
   
   // Horizontal Scroll Math
   const { scrollYProgress } = useScroll({ 
@@ -33,35 +59,28 @@ export function ProjectsPage() {
     offset: ["start start", "end end"] 
   });
   
-  const mapScrollToX = useTransform(scrollYProgress, [0, 1], ["0%", "-85%"]);
+  const mapScrollToX = useTransform(scrollYProgress, [0, 1], [0, scrollRange]);
 
   return (
     <div className="bg-[#0a0a0a] text-white min-h-screen font-sans selection:bg-[#e53935] selection:text-white">
       
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 w-full h-[92px] px-8 md:px-12 z-50 flex items-center justify-between text-[16px] md:text-[18px] bg-[#0a0a0a]/90 backdrop-blur-md">
-        <Link to="/" className="font-sans font-medium text-white hover:text-white/70 flex items-center gap-2 transition-colors">
-          <ArrowLeft className="w-5 h-5" /> Back to Home
+      <nav className="fixed top-0 left-0 w-full h-[92px] px-8 md:px-[60px] z-50 flex items-center justify-between text-[14px] md:text-[16px] bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5 font-sans font-medium">
+        <Link to="/" className="text-white hover:opacity-70 transition-opacity whitespace-nowrap">
+          © Alex Design & Strategy
         </Link>
-        <div className="flex items-center gap-8 md:gap-10 font-sans text-white">
-          <span className="relative group cursor-pointer">
-            <span>Projects</span>
-            <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-[2px] bg-white transition-all duration-300"></span>
-          </span>
-          <span className="relative group cursor-pointer hidden md:inline-block">
-            <span>About</span>
-            <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-[2px] bg-white transition-all duration-300"></span>
-          </span>
-          <span className="relative group cursor-pointer hidden md:inline-block">
-            <span>Contact</span>
-            <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-[2px] bg-white transition-all duration-300"></span>
-          </span>
+        <div className="flex flex-1 justify-center items-center gap-8 md:gap-16">
+          <span className="cursor-pointer text-white hover:opacity-70 transition-opacity">Projects</span>
+          <span className="cursor-pointer text-white hover:opacity-70 transition-opacity">About</span>
+        </div>
+        <div>
+          <span className="cursor-pointer text-white hover:opacity-70 transition-opacity">Contact</span>
         </div>
       </nav>
 
       {/* Hero Section */}
       <section className="pt-[180px] md:pt-[240px] pb-16 px-8 md:px-[60px] bg-[#0a0a0a]">
-        <div className="max-w-[1400px] mx-auto">
+        <div className="w-full">
           <motion.h1 
             initial={{ opacity: 0, y: -70 }}
             animate={{ opacity: 1, y: 0 }}
@@ -74,18 +93,37 @@ export function ProjectsPage() {
       </section>
 
       {/* Horizontal Scroll Section */}
-      <section ref={containerRef} className="relative h-[400vh] bg-[#0a0a0a]">
-        <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
-          <motion.div 
-            style={{ x: mapScrollToX }} 
-            className="flex gap-16 px-8 md:px-[60px] items-center h-full"
-          >
-             {projects.map((proj, idx) => (
-                <ProjectCard key={idx} project={proj} index={idx} />
-             ))}
-             {/* Spacing element at the end of scroll track */}
-             <div className="w-[10vw] flex-shrink-0" />
-          </motion.div>
+      <section ref={containerRef} className="relative bg-[#0a0a0a]" style={{ height: `calc(100vh + ${Math.abs(scrollRange)}px)` }}>
+        <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden pt-[92px]">
+          
+          {/* Categories Filter */}
+          <div className="w-full px-8 md:px-[60px] mb-8 md:mb-12 flex items-center gap-4 overflow-x-auto no-scrollbar relative z-10">
+            {allCategories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border flex-shrink-0 ${
+                  activeFilter === cat 
+                    ? 'border-white bg-white text-[#0a0a0a]' 
+                    : 'border-[#7a7a7a] text-[#888888] hover:border-white hover:text-white bg-transparent'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <div className="w-full h-[65vh] md:h-[75vh]">
+            <motion.div 
+              ref={trackRef}
+              style={{ x: mapScrollToX }} 
+              className="flex gap-16 px-8 md:px-[60px] items-center h-full w-max"
+            >
+               {filteredProjects.map((proj, idx) => (
+                  <ProjectCard key={proj.title} project={proj} index={idx} />
+               ))}
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -101,15 +139,13 @@ export function ProjectsPage() {
           {oldProjects.map((op, i) => (
             <div 
               key={i} 
-              className="group relative flex flex-col md:flex-row justify-between items-start md:items-center py-6 border-b border-white/10 overflow-hidden cursor-pointer"
+              className="group relative flex flex-col md:flex-row justify-between items-start md:items-center py-6 px-4 border-b border-white/10 overflow-hidden cursor-pointer hover:bg-[#161616] transition-colors duration-300 rounded-lg"
             >
-              <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
-              
-              <div className="relative z-10 flex items-center gap-6 w-full md:w-1/3 pl-4">
-                <span className="font-sans font-semibold text-[20px] text-white">
+              <div className="relative z-10 flex items-center gap-6 w-full md:w-1/3">
+                <span className="font-sans font-semibold text-[20px] text-white group-hover:text-[#ff6b4a] transition-colors duration-300">
                   {op.name}
                 </span>
-                <span className="font-dm text-[16px] text-[#888888] group-hover:text-white transition-colors duration-300">
+                <span className="font-dm text-[16px] text-[#888888] group-hover:text-white/80 transition-colors duration-300">
                   ({op.year})
                 </span>
               </div>
@@ -120,7 +156,7 @@ export function ProjectsPage() {
                 </span>
               </div>
 
-              <div className="relative z-10 w-full md:w-1/3 text-left md:text-right mt-2 md:mt-0 pr-4">
+              <div className="relative z-10 w-full md:w-1/3 text-left md:text-right mt-2 md:mt-0">
                 <span className="font-dm text-[16px] text-[#888888] group-hover:text-white transition-colors duration-300">
                   {op.id}
                 </span>
@@ -135,86 +171,86 @@ export function ProjectsPage() {
   );
 }
 
-// Fixed-height, robust Project Card with exact matching layout
+// Project Card with the exact same padding container design as the Home page
 function ProjectCard({ project, index }: { project: any, index: number }) {
-  const imagePanelRef = useRef<HTMLDivElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
-  
+  const [hovering, setHovering] = useState(false);
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-
-  const springConfig = { damping: 25, stiffness: 300 };
+  
+  const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!imagePanelRef.current) return;
-    const rect = imagePanelRef.current.getBoundingClientRect();
-    cursorX.set(e.clientX - rect.left - 50);
-    cursorY.set(e.clientY - rect.top - 50);
+    const rect = e.currentTarget.getBoundingClientRect();
+    cursorX.set(e.clientX - rect.left - 48);
+    cursorY.set(e.clientY - rect.top - 48);
   };
 
-  const isEven = index % 2 === 0;
-
   return (
-    <div className={`w-[90vw] md:w-[1240px] md:h-[640px] flex flex-col items-stretch ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} flex-shrink-0 gap-6 group`}>
-      
-      {/* Image Panel */}
-      <div 
-        ref={imagePanelRef}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        onMouseMove={handleMouseMove}
-        className="w-full md:w-[60%] h-[350px] md:h-full rounded-2xl md:rounded-[24px] border border-white/10 overflow-hidden relative cursor-none bg-[#111111]"
-      >
-        <img 
-          src={project.imgSrc} 
-          alt={project.title}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-[1.05]" 
-        />
+    <div className="w-[90vw] md:w-[80vw] xl:w-[1300px] h-[65vh] md:h-[75vh] flex-shrink-0">
+      {/* Padding Container (Main Card) - Birebir Framer CSS */}
+      <div className="w-full h-full flex flex-col lg:flex-row p-3 gap-[10px] bg-[#161616] rounded-[20px] shadow-[0px_2px_5px_0px_rgba(0,0,0,0.25)]">
         
-        {/* The Exact Red View Cursor */}
-        <AnimatePresence>
-          {isHovering && (
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0, opacity: 0 }}
-              style={{ x: cursorXSpring, y: cursorYSpring }}
-              className="absolute top-0 left-0 w-[100px] h-[100px] bg-[#e53935] rounded-full flex items-center justify-center text-white font-sans font-medium pointer-events-none z-50 tracking-wide"
-            >
-              View
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+        {/* Image Container */}
+        <div 
+          className="w-full lg:flex-1 h-[40vh] lg:h-full relative rounded-[16px] border border-[#7a7a7a] overflow-hidden cursor-none"
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+          onMouseMove={handleMouseMove}
+        >
+          <motion.img 
+            initial={{ scale: 1 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            src={project.imgSrc}
+            alt={project.title}
+            className="w-full h-full object-cover"
+          />
+          
+          {/* Custom Mouse Cursor */}
+          <AnimatePresence>
+            {hovering && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                transition={{ duration: 0.2 }}
+                style={{ x: cursorXSpring, y: cursorYSpring }}
+                className="absolute left-0 top-0 pointer-events-none z-50"
+              >
+                <div className="w-24 h-24 bg-[#ff6b4a] text-white rounded-full flex items-center justify-center text-lg font-medium tracking-wide shadow-xl">
+                  View
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
-      {/* Text Panel */}
-      <div className="w-full md:w-[40%] h-auto md:h-full rounded-2xl md:rounded-[24px] border border-white/10 bg-[#0a0a0a] p-8 md:p-12 flex flex-col overflow-y-auto custom-scrollbar">
-        
-        {/* Top Text Content */}
-        <div className="flex flex-col">
-          <span className="font-dm text-[15px] text-white tracking-[0.15em] leading-none uppercase">
+        {/* Text Container */}
+        <div className="w-full lg:w-[400px] xl:w-[450px] shrink-0 flex flex-col h-full rounded-[12px] border border-[#7a7a7a] p-8 lg:p-10 bg-transparent">
+          <div className="font-mono text-sm text-[#544F4F] mb-4">
             ({project.year})
-          </span>
-          <h3 className="font-sans text-4xl md:text-[52px] font-bold text-white tracking-tight mt-6 leading-[1.05em]">
+          </div>
+          
+          <h2 className="text-4xl lg:text-5xl font-display font-semibold tracking-tight text-white mb-6">
             {project.title}
-          </h3>
-          <p className="font-sans text-[#a3a3a3] text-[17px] md:text-[18px] leading-[1.6em] mt-6">
+          </h2>
+          
+          <p className="text-[#544F4F] text-sm lg:text-base leading-relaxed">
             {project.desc}
           </p>
-        </div>
 
-        {/* Bottom Tags Container that forces itself to the bottom */}
-        <div className="flex flex-col mt-auto pt-10">
-          <div className="border-t border-white/10" />
-          {project.tags.map((tag: string, i: number) => (
-            <div key={i} className="border-b border-white/10 py-5 font-sans font-medium text-[16px] md:text-[17px] text-white/90 tracking-wide">
-              {tag}
-            </div>
-          ))}
+          <div className="mt-auto pt-8 flex flex-col w-full">
+            {project.tags.map((tag: string, i: number) => (
+              <React.Fragment key={i}>
+                {i > 0 && <div className="h-[1px] w-full bg-[#7a7a7a]/50 my-4" />}
+                <div className="text-sm text-[#544F4F]">{tag}</div>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
-        
       </div>
     </div>
   );

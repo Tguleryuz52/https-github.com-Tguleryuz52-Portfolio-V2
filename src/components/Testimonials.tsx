@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
-import { Container } from './ui/Layout';
+import { Container, SectionSubtitle } from './ui/Layout';
 
 const quotePart1 = `"His keen eye for detail and innovative approach`.split(" ");
 const quotePart2 = `impressed our team, turning challenges into creative solutions that set him apart."`.split(" ");
@@ -39,27 +39,22 @@ export function Testimonials() {
   });
 
   return (
-    <section ref={containerRef} className="py-24 md:py-32 min-h-screen flex flex-col justify-center border-t border-white/5 relative overflow-hidden bg-[#0a0a0a]">
-      {/* Absolute top-left Testimonials identifier matching the specific style */}
-      <div className="absolute top-8 left-6 md:left-12">
-        <h3 className="text-brand-accent font-sans font-medium text-xs md:text-sm tracking-widest uppercase">
-          // Testimonials
-        </h3>
-      </div>
+    <section ref={containerRef} className="h-[100dvh] w-full flex flex-col justify-center border-t border-white/5 relative overflow-hidden bg-[#0a0a0a]">
+      <SectionSubtitle>Testimonials</SectionSubtitle>
 
       <Container className="relative h-full flex flex-col justify-center">
         
-        <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-16 mt-20 md:mt-24 w-full relative items-start">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-16 w-full relative items-start">
           
           {/* Numbers: 01 / 03 exactly matching the visual layout */}
-          <div className="md:w-[80px] lg:w-[120px] flex-shrink-0 pt-2 lg:pt-4 text-left">
-            <span className="text-brand-accent font-sans font-medium text-sm md:text-base lg:text-lg">01</span>
+          <div className="md:w-[80px] lg:w-[120px] flex-shrink-0 pt-1 lg:pt-2 text-left">
+            <span className="text-[#e53935] font-sans font-medium text-sm md:text-base lg:text-lg">01</span>
             <span className="text-white/40 font-sans font-medium text-xs md:text-sm lg:text-base"> / 03</span>
           </div>
           
           {/* Main Quote Area */}
           <div className="w-full max-w-[900px] xl:max-w-[1100px] pr-8 md:pr-32 relative">
-             <h2 className="text-[2.25rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[84px] font-sans font-bold leading-[1.05] tracking-tight">
+             <h2 className="text-[clamp(2rem,4.5vw,5.5rem)] font-sans font-bold leading-[1.05] tracking-tight">
                 {allWords.map((wordObj, i) => {
                   const start = i / allWords.length;
                   const end = start + (1 / allWords.length);

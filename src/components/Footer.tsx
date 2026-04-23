@@ -43,46 +43,41 @@ export function Footer() {
         </div>
 
         {/* KATMAN 2: Devasa Yazı (Mix-blend-difference) - Z-20 ile resmin tam önü */}
-        <div className="absolute inset-0 flex flex-col justify-center pointer-events-none z-20 mix-blend-difference overflow-hidden">
+        <div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none z-20 mix-blend-difference overflow-hidden">
           <motion.div 
             style={{ x: textX }}
-            className="flex whitespace-nowrap items-center w-[200%]"
+            className="flex justify-center items-center w-full"
           >
-            {[...marqueeItems].map((_, i) => (
-              <span 
-                key={i} 
-                className="text-[28vw] md:text-[26vw] font-display font-medium leading-none text-white tracking-tighter shrink-0 pr-[4vw]"
-              >
-                Out - Reach
-              </span>
-            ))}
+            <span className="text-[16vw] md:text-[18vw] font-display font-medium leading-[0.85] text-white tracking-tighter whitespace-nowrap">
+              Out - Reach Out -
+            </span>
           </motion.div>
         </div>
 
         {/* KATMAN 3: Alt ve Üst Sabit İletişim Detayları */}
         {/* Resmin üzerinden ve yazının üzerinden tamamen bağımsız, ekranın köşelerine dayanan kısım */}
-        <div className="absolute inset-x-0 bottom-0 z-30 p-8 md:p-12 mb-safe flex flex-col pointer-events-none">
-          <div className="flex flex-col gap-10 text-sm tracking-wide pointer-events-auto">
+        <div className="absolute inset-x-0 bottom-0 z-30 p-6 md:p-10 flex flex-col pointer-events-none">
+          <div className="flex flex-col gap-6 md:gap-8 pointer-events-auto">
             {/* Adres Bilgileri */}
-            <div className="flex flex-col gap-1">
-              <p><span className="font-bold">Office:</span> <span className="opacity-70 font-medium">Ozeanblickstraße, Berlin 10115, Germany</span></p>
-              <p><span className="font-bold">Mail:</span> <a href="mailto:hello@talhaguleryuz.com" className="opacity-70 font-medium hover:opacity-100 transition-opacity">hello@talhaguleryuz.com</a></p>
-              <p><span className="font-bold">Phone:</span> <span className="opacity-70 font-medium">+49 30 12345678</span></p>
+            <div className="flex flex-col gap-1 text-[11px] md:text-[13px] tracking-wide text-[#1a1a1a]">
+              <p><span className="font-bold mr-1">Office:</span> <span className="opacity-70 font-medium">Ozeanblickstraße, Berlin 10115, Germany</span></p>
+              <p><span className="font-bold mr-1">Mail:</span> <a href="mailto:hello@talhaguleryuz.com" className="opacity-70 font-medium hover:opacity-100 transition-opacity">hello@talhaguleryuz.com</a></p>
+              <p><span className="font-bold mr-1">Phone:</span> <span className="opacity-70 font-medium">+49 30 12345678</span></p>
             </div>
 
             {/* Sosyal Medya İkonları */}
-            <div className="flex items-center gap-4">
-              <a href="#" className="flex items-center justify-center gap-3 group hover:bg-black/5 transition-colors px-6 py-2.5 border border-black/10 rounded-lg">
-                <Linkedin className="w-4 h-4 opacity-70" />
-                <span className="font-semibold text-sm">LinkedIn</span>
+            <div className="flex flex-wrap items-center gap-3">
+              <a href="#" className="flex items-center justify-center gap-2 group hover:bg-black/10 transition-colors px-4 py-2 border border-black/10 rounded-full bg-transparent">
+                <Linkedin className="w-3.5 h-3.5 opacity-80" strokeWidth={2} />
+                <span className="font-semibold text-[11px] md:text-xs opacity-90 tracking-wide">LinkedIn</span>
               </a>
-              <a href="#" className="flex items-center justify-center gap-3 group hover:bg-black/5 transition-colors px-6 py-2.5 border border-black/10 rounded-lg">
-                <BehanceIcon className="w-4 h-4 opacity-70 fill-current" />
-                <span className="font-semibold text-sm">Behance</span>
+              <a href="#" className="flex items-center justify-center gap-2 group hover:bg-black/10 transition-colors px-4 py-2 border border-black/10 rounded-full bg-transparent">
+                <BehanceIcon className="w-3.5 h-3.5 opacity-80 fill-current" />
+                <span className="font-semibold text-[11px] md:text-xs opacity-90 tracking-wide">Behance</span>
               </a>
-              <a href="#" className="flex items-center justify-center gap-3 group hover:bg-black/5 transition-colors px-6 py-2.5 border border-black/10 rounded-lg">
-                <Instagram className="w-4 h-4 opacity-70" />
-                <span className="font-semibold text-sm">Instagram</span>
+              <a href="#" className="flex items-center justify-center gap-2 group hover:bg-black/10 transition-colors px-4 py-2 border border-black/10 rounded-full bg-transparent">
+                <Instagram className="w-3.5 h-3.5 opacity-80" strokeWidth={2} />
+                <span className="font-semibold text-[11px] md:text-xs opacity-90 tracking-wide">Instagram</span>
               </a>
             </div>
           </div>

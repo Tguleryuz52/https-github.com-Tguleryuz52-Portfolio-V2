@@ -59,10 +59,8 @@ export function Intro() {
 
   return (
     <section id="about" className="py-24 md:py-48 relative">
+      <SectionSubtitle>Intro</SectionSubtitle>
       <Container>
-        <div className="mb-12 md:mb-20">
-          <SectionSubtitle>Intro</SectionSubtitle>
-        </div>
         
         <div className="flex flex-col relative" ref={containerRef}>
           <div className="w-full max-w-[1000px] mx-auto text-center">

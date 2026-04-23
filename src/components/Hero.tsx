@@ -16,18 +16,16 @@ export function Hero() {
 
   // Yatay kayma (Horizontal Marquee on Scroll)
   // Ekran aşağı kaydıkça yazı sola doğru sürekli akacak.
-  // Scroll alanını (h-[120vh]) büyüttüğümüz için girdi aralığını 0-1200'e çekebiliriz.
-  const textX = useTransform(scrollY, [0, 1200], ["0%", "-20%"]); 
+  const textX = useTransform(scrollY, [0, 1000], ["0%", "-15%"]); 
   
   // Fotoğrafın hafif dikey kayması (Parallax)
-  const imageY = useTransform(scrollY, [0, 1200], ["0%", "10%"]); 
+  const imageY = useTransform(scrollY, [0, 1000], ["0%", "8%"]); 
 
   // Talha Guleryuz - Talha Guleryuz - ... şeklinde yan yana şerit text oluşturmak için dizi kullanıyoruz.
   const marqueeItems = Array(20).fill("Talha Guleryuz");
 
   return (
-    // h-[100dvh] yerine h-[120vh] yaparak scroll alanını bir tık büyüttük.
-    <section className="relative h-[120vh] min-h-[800px] w-full bg-[#E8E8E8] overflow-hidden font-sans z-0">
+    <section className="relative h-[100dvh] min-h-[600px] w-full bg-[#E8E8E8] overflow-hidden font-sans z-0">
       
       {/* Centered Portrait Image */}
       <motion.div 
