@@ -58,7 +58,7 @@ export function Intro() {
   const pY = useTransform(scrollYProgress, [0.75, 0.85], [30, 0]);
 
   return (
-    <section id="about" className="py-24 md:py-48 relative">
+    <section id="about" className="py-24 md:py-48 relative border-t border-white/10">
       <SectionSubtitle>Intro</SectionSubtitle>
       <Container>
         

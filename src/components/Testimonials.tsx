@@ -39,7 +39,7 @@ export function Testimonials() {
   });
 
   return (
-    <section ref={containerRef} className="h-[100dvh] w-full flex flex-col justify-center border-t border-white/5 relative overflow-hidden bg-[#0a0a0a]">
+    <section ref={containerRef} className="h-[100dvh] w-full flex flex-col justify-center border-t border-white/10 relative overflow-hidden bg-[#0a0a0a]">
       <SectionSubtitle>Testimonials</SectionSubtitle>
 
       <Container className="relative h-full flex flex-col justify-center">

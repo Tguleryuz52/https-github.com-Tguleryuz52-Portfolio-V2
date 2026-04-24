@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring, MotionValue } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { Container, SectionSubtitle } from './ui/Layout';
 
 const projects = [
@@ -64,18 +65,20 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
     cursorY.set(e.clientY - rect.top - 48);
   };
 
+  const projectId = project.title.toLowerCase().replace(/\s+/g, '-');
+
   return (
-    <div className="sticky top-0 h-[100dvh] w-full flex items-center justify-center p-4 md:p-8 lg:p-12 xl:p-16">
+    <Link to={`/projects/${projectId}`} className="sticky top-0 h-[100dvh] w-full flex items-center justify-center p-4 pt-16 md:p-8 md:pt-24 lg:p-12 lg:pt-28 xl:p-16 xl:pt-32 cursor-pointer block">
       <motion.div 
         style={{ scale }}
         className="relative w-full h-full max-w-[1800px] mx-auto origin-top"
       >
         {/* Padding Container (Main Card) - Birebir Framer CSS */}
-        <div className="w-full h-[100dvh] flex flex-col lg:flex-row p-3 gap-[10px] bg-[#161616] rounded-[20px] shadow-[0px_2px_5px_0px_rgba(0,0,0,0.25)]">
+        <div className="w-full h-full flex flex-col lg:flex-row p-3 gap-[10px] bg-[#161616] rounded-[24px] border border-white/5 shadow-2xl">
           
           {/* Image Container */}
           <div 
-            className="w-full lg:flex-1 h-[50vh] lg:h-full relative rounded-[16px] border border-[#7a7a7a] overflow-hidden cursor-none"
+            className="w-full lg:flex-1 h-[45vh] lg:h-full relative rounded-[16px] overflow-hidden cursor-none shrink-0 lg:shrink"
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
             onMouseMove={handleMouseMove}
@@ -100,7 +103,7 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
                   style={{ x: cursorXSpring, y: cursorYSpring }}
                   className="absolute left-0 top-0 pointer-events-none z-50"
                 >
-                  <div className="w-24 h-24 bg-[#ff6b4a] text-white rounded-full flex items-center justify-center text-lg font-medium tracking-wide shadow-xl">
+                  <div className="w-24 h-24 bg-[#e53935] text-white rounded-full flex items-center justify-center text-lg font-medium tracking-wide shadow-xl">
                     View
                   </div>
                 </motion.div>
@@ -109,8 +112,8 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
           </div>
 
           {/* Text Container */}
-          <div className="w-full lg:w-[400px] xl:w-[450px] shrink-0 flex flex-col h-full rounded-[12px] border border-[#7a7a7a] p-8 lg:p-10 bg-transparent">
-            <div className="font-mono text-sm text-[#544F4F] mb-4">
+          <div className="w-full lg:w-[400px] xl:w-[450px] shrink-0 flex flex-col flex-1 lg:flex-none lg:h-full rounded-[16px] p-6 lg:p-10 bg-transparent overflow-y-auto no-scrollbar min-h-0">
+            <div className="font-mono text-[15px] text-white font-medium mb-4">
               ({project.year})
             </div>
             
@@ -118,15 +121,15 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
               {project.title}
             </h2>
             
-            <p className="text-[#544F4F] text-sm lg:text-base leading-relaxed">
+            <p className="text-[#a3a3a3] text-[15px] leading-[1.6]">
               {project.desc}
             </p>
 
             <div className="mt-auto pt-8 flex flex-col w-full">
               {project.tags.map((tag: string, i: number) => (
                 <React.Fragment key={i}>
-                  {i > 0 && <div className="h-[1px] w-full bg-[#7a7a7a]/50 my-4" />}
-                  <div className="text-sm text-[#544F4F]">{tag}</div>
+                  {i > 0 && <div className="h-[1px] w-full bg-white/10 my-4" />}
+                  <div className="text-[15px] text-[#a3a3a3]">{tag}</div>
                 </React.Fragment>
               ))}
             </div>
@@ -139,7 +142,7 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
           className="absolute inset-0 bg-black pointer-events-none z-10 rounded-[24px]"
         />
       </motion.div>
-    </div>
+    </Link>
   );
 }
 
@@ -153,7 +156,7 @@ export function Projects() {
   });
 
   return (
-    <section ref={containerRef} className="relative bg-[#0a0a0a] pb-24 pt-24">
+    <section ref={containerRef} className="relative bg-[#0a0a0a] pb-24 pt-24 border-t border-white/10">
       <SectionSubtitle>Projects</SectionSubtitle>
 
       {/* Kartlar yapışkan ve üst üste biner */}

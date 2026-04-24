@@ -14,11 +14,13 @@ export function Container({ children, className = '', ...props }: ContainerProps
 
 export function SectionSubtitle({ children }: { children: React.ReactNode }) {
   return (
-    <div className="absolute top-8 md:top-12 left-6 md:left-12 flex items-center gap-1.5 opacity-90 z-20 pointer-events-none">
-      <span className="text-[#e53935] font-sans font-semibold text-sm">//</span>
-      <h3 className="text-[#e53935] font-sans font-medium text-xs md:text-sm tracking-widest uppercase">
-        {children}
-      </h3>
+    <div className="sticky top-6 md:top-8 lg:top-12 z-20 pointer-events-none w-full h-0">
+      <div className="absolute left-6 md:left-12 flex items-center gap-1.5 opacity-90">
+        <span className="text-[#e53935] font-sans font-semibold text-sm">//</span>
+        <h3 className="text-[#e53935] font-sans font-medium text-xs md:text-sm tracking-widest uppercase">
+          {children}
+        </h3>
+      </div>
     </div>
   );
 }

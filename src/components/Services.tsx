@@ -97,7 +97,7 @@ export function Services() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="services" className="bg-[#0a0a0a] min-h-screen py-24 md:py-32 border-t border-border-subtle relative">
+    <section id="services" className="bg-[#0a0a0a] min-h-screen py-24 md:py-32 border-t border-white/10 relative">
       <SectionSubtitle>Services</SectionSubtitle>
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-24 relative mt-12 md:mt-24">

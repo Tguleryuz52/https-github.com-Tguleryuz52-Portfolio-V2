@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { useRef } from 'react';
+import { useLenis } from 'lenis/react';
 import { Linkedin, Instagram, ArrowUp } from 'lucide-react';
 
 const BehanceIcon = ({ className }: { className?: string }) => (
@@ -10,6 +11,7 @@ const BehanceIcon = ({ className }: { className?: string }) => (
 
 export function Footer() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const lenis = useLenis();
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -57,27 +59,27 @@ export function Footer() {
         {/* KATMAN 3: Alt ve Üst Sabit İletişim Detayları */}
         {/* Resmin üzerinden ve yazının üzerinden tamamen bağımsız, ekranın köşelerine dayanan kısım */}
         <div className="absolute inset-x-0 bottom-0 z-30 p-6 md:p-10 flex flex-col pointer-events-none">
-          <div className="flex flex-col gap-6 md:gap-8 pointer-events-auto">
+          <div className="flex flex-col gap-8 md:gap-12 pointer-events-auto">
             {/* Adres Bilgileri */}
-            <div className="flex flex-col gap-1 text-[11px] md:text-[13px] tracking-wide text-[#1a1a1a]">
-              <p><span className="font-bold mr-1">Office:</span> <span className="opacity-70 font-medium">Ozeanblickstraße, Berlin 10115, Germany</span></p>
-              <p><span className="font-bold mr-1">Mail:</span> <a href="mailto:hello@talhaguleryuz.com" className="opacity-70 font-medium hover:opacity-100 transition-opacity">hello@talhaguleryuz.com</a></p>
-              <p><span className="font-bold mr-1">Phone:</span> <span className="opacity-70 font-medium">+49 30 12345678</span></p>
+            <div className="flex flex-col gap-1.5 text-[15px] md:text-[18px] tracking-tight text-[#1a1a1a]">
+              <p><span className="font-bold mr-1.5 text-black">Office:</span> <span className="font-medium text-[#1a1a1a]">Ozeanblickstraße, Berlin 10115, Germany</span></p>
+              <p><span className="font-bold mr-1.5 text-black">Mail:</span> <a href="mailto:hello@talhaguleryuz.com" className="font-medium text-[#1a1a1a] hover:opacity-70 transition-opacity">hello@talhaguleryuz.com</a></p>
+              <p><span className="font-bold mr-1.5 text-black">Phone:</span> <span className="font-medium text-[#1a1a1a]">+49 30 12345678</span></p>
             </div>
 
             {/* Sosyal Medya İkonları */}
-            <div className="flex flex-wrap items-center gap-3">
-              <a href="#" className="flex items-center justify-center gap-2 group hover:bg-black/10 transition-colors px-4 py-2 border border-black/10 rounded-full bg-transparent">
-                <Linkedin className="w-3.5 h-3.5 opacity-80" strokeWidth={2} />
-                <span className="font-semibold text-[11px] md:text-xs opacity-90 tracking-wide">LinkedIn</span>
+            <div className="flex flex-wrap items-center gap-6 md:gap-8 mt-2">
+              <a href="#" className="flex items-center gap-2 group hover:opacity-60 transition-opacity text-[#1a1a1a]">
+                <Linkedin className="w-5 h-5 md:w-[22px] md:h-[22px]" strokeWidth={1.5} />
+                <span className="font-medium text-[16px] md:text-[18px] tracking-tight">Linkedin</span>
               </a>
-              <a href="#" className="flex items-center justify-center gap-2 group hover:bg-black/10 transition-colors px-4 py-2 border border-black/10 rounded-full bg-transparent">
-                <BehanceIcon className="w-3.5 h-3.5 opacity-80 fill-current" />
-                <span className="font-semibold text-[11px] md:text-xs opacity-90 tracking-wide">Behance</span>
+              <a href="#" className="flex items-center gap-2 group hover:opacity-60 transition-opacity text-[#1a1a1a]">
+                <BehanceIcon className="w-5 h-5 md:w-[22px] md:h-[22px] fill-current" />
+                <span className="font-medium text-[16px] md:text-[18px] tracking-tight">Behance</span>
               </a>
-              <a href="#" className="flex items-center justify-center gap-2 group hover:bg-black/10 transition-colors px-4 py-2 border border-black/10 rounded-full bg-transparent">
-                <Instagram className="w-3.5 h-3.5 opacity-80" strokeWidth={2} />
-                <span className="font-semibold text-[11px] md:text-xs opacity-90 tracking-wide">Instagram</span>
+              <a href="#" className="flex items-center gap-2 group hover:opacity-60 transition-opacity text-[#1a1a1a]">
+                <Instagram className="w-5 h-5 md:w-[22px] md:h-[22px]" strokeWidth={1.5} />
+                <span className="font-medium text-[16px] md:text-[18px] tracking-tight">Instagram</span>
               </a>
             </div>
           </div>
@@ -86,7 +88,7 @@ export function Footer() {
         {/* Üst Sağ: Yukarı Ok (Ayrı bir fixed container olarak, diğer elementlerle çakışmaması için) */}
         <div className="absolute top-8 right-8 md:top-12 md:right-12 z-30 pointer-events-auto">
           <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+            onClick={() => lenis ? lenis.scrollTo(0, { duration: 1.5 }) : window.scrollTo({ top: 0, behavior: 'smooth' })} 
             className="w-[50px] h-[50px] bg-[#1a1a1a] text-white rounded-full hover:scale-105 transition-transform duration-300 outline-none flex justify-center items-center"
             aria-label="Back to top"
           >

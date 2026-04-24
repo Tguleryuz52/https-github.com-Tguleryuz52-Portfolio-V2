@@ -64,19 +64,6 @@ export function ProjectsPage() {
   return (
     <div className="bg-[#0a0a0a] text-white min-h-screen font-sans selection:bg-[#e53935] selection:text-white">
       
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 w-full h-[92px] px-8 md:px-[60px] z-50 flex items-center justify-between text-[14px] md:text-[16px] bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5 font-sans font-medium">
-        <Link to="/" className="text-white hover:opacity-70 transition-opacity whitespace-nowrap">
-          © Alex Design & Strategy
-        </Link>
-        <div className="flex flex-1 justify-center items-center gap-8 md:gap-16">
-          <span className="cursor-pointer text-white hover:opacity-70 transition-opacity">Projects</span>
-          <span className="cursor-pointer text-white hover:opacity-70 transition-opacity">About</span>
-        </div>
-        <div>
-          <span className="cursor-pointer text-white hover:opacity-70 transition-opacity">Contact</span>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       <section className="pt-[180px] md:pt-[240px] pb-16 px-8 md:px-[60px] bg-[#0a0a0a]">
@@ -174,6 +161,7 @@ export function ProjectsPage() {
 // Project Card with the exact same padding container design as the Home page
 function ProjectCard({ project, index }: { project: any, index: number }) {
   const [hovering, setHovering] = useState(false);
+  const projectId = project.title.toLowerCase().replace(/\s+/g, '-');
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -189,9 +177,9 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
   };
 
   return (
-    <div className="w-[90vw] md:w-[80vw] xl:w-[1300px] h-[65vh] md:h-[75vh] flex-shrink-0">
+    <Link to={`/projects/${projectId}`} className="w-[90vw] md:w-[80vw] xl:w-[1300px] h-[65vh] md:h-[75vh] flex-shrink-0 block">
       {/* Padding Container (Main Card) - Birebir Framer CSS */}
-      <div className="w-full h-full flex flex-col lg:flex-row p-3 gap-[10px] bg-[#161616] rounded-[20px] shadow-[0px_2px_5px_0px_rgba(0,0,0,0.25)]">
+      <div className="w-full h-full flex flex-col lg:flex-row p-3 gap-[10px] bg-[#161616] rounded-[20px] shadow-[0px_2px_5px_0px_rgba(0,0,0,0.25)] hover:border-white/10 border border-transparent transition-colors">
         
         {/* Image Container */}
         <div 
@@ -252,6 +240,6 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

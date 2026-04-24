@@ -60,33 +60,6 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Top Navbar */}
-      <nav className="absolute top-0 left-0 w-full grid grid-cols-2 md:grid-cols-4 p-6 md:p-8 z-30 text-white font-medium text-sm md:text-base pointer-events-auto mix-blend-difference">
-        <div className="text-left">
-          <div className="relative group cursor-pointer inline-block">
-            <span className="opacity-100 transition-opacity">© Talha Design & Strategy</span>
-            <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full"></span>
-          </div>
-        </div>
-        <div className="text-center hidden md:flex justify-center">
-          <div className="relative group cursor-pointer inline-block">
-            <span className="opacity-100 transition-opacity">About</span>
-            <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full"></span>
-          </div>
-        </div>
-        <div className="text-center hidden md:flex justify-center">
-          <Link to="/projects" className="relative group cursor-pointer inline-block">
-            <span className="opacity-100 transition-opacity">Projects</span>
-            <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-        </div>
-        <div className="text-right flex justify-end">
-          <div className="relative group cursor-pointer inline-block">
-            <span className="opacity-100 transition-opacity">Contact</span>
-            <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full"></span>
-          </div>
-        </div>
-      </nav>
 
       {/* Bottom Elements */}
       <div className="absolute bottom-0 left-0 w-full flex flex-row justify-between items-end p-6 md:p-8 z-30 text-white mix-blend-difference">
