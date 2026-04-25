@@ -44,10 +44,10 @@ export function Navbar() {
         </Link>
       </div>
       <div className="text-right flex justify-end items-center pointer-events-auto">
-        <div className="relative group cursor-pointer inline-block">
+        <Link to="/contact" className="relative group cursor-pointer inline-block">
           <span className="opacity-100 transition-opacity">Contact</span>
           <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full"></span>
-        </div>
+        </Link>
       </div>
     </motion.nav>
   );
