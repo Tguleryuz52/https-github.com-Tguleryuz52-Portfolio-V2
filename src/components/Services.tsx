@@ -4,39 +4,39 @@ import { useRef, useEffect, useState } from 'react';
 
 const services = [
   {
-    category: "Branding & Marketing",
-    desc: "Branding that builds trust and drives loyalty through clear visuals and messaging, into an unforgettable online experience.",
+    category: "3D Görselleştirme",
+    desc: "Unreal Engine 5, Blender ve endüstriyel standartlarla oluşturulan hiper-gerçekçi modeller ve nefes kesici görsel evrenler.",
     number: "01",
     items: [
-      "Brand Strategy and Messaging",
-      "Logo Design",
-      "Visual Identity",
-      "Brand Guidelines & Frameworks",
-      "Marketing materials",
-      "Motion Design"
+      "Ürün Görselleştirme",
+      "Karakter & Çevre Tasarımı",
+      "Endüstriyel Konseptler",
+      "Animasyon & Simülasyon",
+      "Robotik Modelleme"
     ]
   },
   {
-    category: "Website Design",
-    desc: "Not just about aesthetics, but about developing logical, scalable design systems that are precisely tailored to the web and app application.",
+    category: "Arayüz & Deneyim",
+    desc: "Sadece estetik değil, aynı zamanda kullanıcıyla iletişim kuran, akılda kalıcı, organik ve ölçeklenebilir arayüz tasarımları.",
     number: "02",
     items: [
-      "Landing Pages",
-      "Corporate Websites",
-      "Blogs",
-      "E-commerce",
-      "Complex Websites"
+      "Kullanıcı Deneyimi (UX)",
+      "Kullanıcı Arayüzü (UI)",
+      "Etkileşim Tasarımı & Lottie",
+      "Hızlı Prototipleme",
+      "Tasarım Sistemleri"
     ]
   },
   {
-    category: "Web Development",
-    desc: "User-focused app design that maximizes usability and encourages retention.",
+    category: "Yazılım Geliştirme",
+    desc: "Tasarım ve kod arasındaki duvarı yıkıyorum. Modern web mimarileriyle ölçeklenebilir, performans odaklı dijital ürünler yaratıyorum.",
     number: "03",
     items: [
-      "Framer, Webflow, or WordPress Builds",
-      "CMS Integration",
-      "SEO Optimization",
-      "Site Migrations"
+      "React & Next.js Uygulamaları",
+      "Mobil Geliştirme (React Native)",
+      "Backend Mimari (Node.js, Supabase)",
+      "Framer & Webflow Entegrasyonu",
+      "Yapay Zeka (AI) API Entegrasyonları"
     ]
   }
 ];
@@ -98,7 +98,7 @@ export function Services() {
 
   return (
     <section id="services" className="bg-[#0a0a0a] min-h-screen py-24 md:py-32 border-t border-white/10 relative">
-      <SectionSubtitle>Services</SectionSubtitle>
+      <SectionSubtitle>Uzmanlık Alanları</SectionSubtitle>
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-24 relative mt-12 md:mt-24">
           

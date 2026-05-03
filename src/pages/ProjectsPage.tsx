@@ -3,25 +3,15 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePres
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Footer } from '../components/Footer';
+import { PageTransition } from '../components/PageTransition';
 
-const projects = [
-  { imgSrc: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1600', year: '2024', title: 'Formula Vintage', desc: 'For Formula Vintage, we crafted a design that honors the rich heritage of classic cars while adding a modern twist. Combining timeless elegance with sleek, contemporary elements, we created an experience that appeals to both enthusiasts and newcomers, celebrating the past with a fresh perspective.', tags: ['Landing Page', 'Mobile App', 'Redesign', 'UI/UX'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&q=80&w=1600', year: '2024', title: 'Sprey Zest', desc: 'For Sprey Zest, we took a playful, bold approach to packaging and branding. Instead of following the typical fresh or clean aesthetic, we infused energy and personality into every detail, making the product stand out on shelves and bringing a burst of excitement to the consumer experience.', tags: ['Website Design', 'Branding', '3D Design'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=1600', year: '2020', title: 'Super Pro', desc: 'For Super-Pro, we redefined what it means to be professional. A tool built for modern achievers focusing on rapid scaling without losing the design fundamentals.', tags: ['Desktop App', 'Mobile App', 'UI/UX'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600', year: '2024', title: 'Architech Buildings', desc: 'We redefined the concept of modern living by creating a design that challenges conventional boundaries, turning purely functional spaces into artistic statements.', tags: ['Mobile App', 'Branding', 'Website Design', '3D Design'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1600', year: '2022', title: 'Posnen Gallery', desc: 'For the Posnen gallery campaign, we flipped the typical sports ad by focusing on character rather than performance. Elevating the human form to high art status.', tags: ['Desktop App', 'Branding', 'UI/UX'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1600', year: '2023', title: 'Fringe Sports', desc: 'For Fringe Sports, we broke away from the typical sports advertising mold, looking at the quirky side of athletic culture and bringing a retro-futuristic styling to the forefront.', tags: ['Desktop App', 'Entertainment', 'Branding', '3D Design'] },
-  { imgSrc: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1600', year: '2022', title: 'Lot and Coin', desc: 'For Lot-and-Coin, we created a brand identity that blends trust with excitement. Focusing on the thrill of the auction, keeping the digital facade as sleek and mysterious as possible.', tags: ['Mobile App', 'Branding', 'UI/UX'] }
-];
+import { projects } from '../data/projects';
 
 const oldProjects = [
-  { name: 'Vodoo Child', year: '2021', category: 'Branding', id: '01' },
-  { name: 'Smooth', year: '2020', category: 'Branding', id: '02' },
-  { name: 'Cole Tech', year: '2019', category: 'Branding', id: '03' },
-  { name: 'Vans', year: '2019', category: 'Landing Page', id: '04' },
-  { name: 'Sony', year: '2019', category: 'Landing Page', id: '05' },
-  { name: 'Son and Father', year: '2018', category: 'Mobile App', id: '06' },
-  { name: 'Von', year: '2017', category: 'Web App', id: '07' },
+  { name: 'Nevera Robot Interface', year: '2023', category: 'UI/UX Tasarımı', id: '01' },
+  { name: 'Asimov Tech', year: '2023', category: 'Marka Kimliği', id: '02' },
+  { name: 'Feron Dashboard', year: '2024', category: 'Web App', id: '03' },
+  { name: 'Nexus 3D Concept', year: '2023', category: '3D Görselleştirme', id: '04' },
 ];
 
 export function ProjectsPage() {
@@ -62,119 +52,107 @@ export function ProjectsPage() {
   const mapScrollToX = useTransform(scrollYProgress, [0, 1], [0, scrollRange]);
 
   return (
-    <div className="bg-[#0a0a0a] text-white min-h-screen font-sans selection:bg-[#e53935] selection:text-white">
-      
+    <PageTransition>
+      <div className="bg-[#0a0a0a] text-white min-h-screen font-sans selection:bg-[#e53935] selection:text-white">
+        
+        {/* Hero Section */}
+        <section className="pt-[180px] md:pt-[240px] pb-16 px-8 md:px-[60px] bg-[#0a0a0a]">
+          <div className="w-full">
+            <motion.h1 
+              initial={{ opacity: 0, y: -70 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+              className="text-7xl md:text-[8vw] font-bold text-white tracking-tighter leading-none"
+            >
+              Work Index
+            </motion.h1>
+          </div>
+        </section>
 
-      {/* Hero Section */}
-      <section className="pt-[180px] md:pt-[240px] pb-16 px-8 md:px-[60px] bg-[#0a0a0a]">
-        <div className="w-full">
-          <motion.h1 
-            initial={{ opacity: 0, y: -70 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-            className="text-7xl md:text-[8vw] font-bold text-white tracking-tighter leading-none"
-          >
-            Work Index
-          </motion.h1>
-        </div>
-      </section>
+        {/* Horizontal Scroll Section */}
+        <section ref={containerRef} className="relative bg-[#0a0a0a]" style={{ height: `calc(100vh + ${Math.abs(scrollRange)}px)` }}>
+          <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden pt-[92px]">
+            
+            {/* Categories Filter */}
+            <div className="w-full px-8 md:px-[60px] py-6 mb-2 md:mb-6 flex items-center gap-4 overflow-x-auto no-scrollbar relative z-10">
+              {allCategories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveFilter(cat)}
+                  className={`relative px-8 py-3 rounded-full text-sm font-medium transition-all duration-500 flex-shrink-0 backdrop-blur-xl border group overflow-hidden ${
+                    activeFilter === cat 
+                      ? 'bg-white/15 border-white/40 text-white shadow-[0_8px_20px_rgba(255,255,255,0.1)] shadow-[inset_0_1px_3px_rgba(255,255,255,0.5)]' 
+                      : 'bg-white/5 border-white/10 text-[#a0a0a0] hover:bg-white/10 hover:border-white/30 hover:text-white shadow-[0_4px_12px_rgba(0,0,0,0.3)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]'
+                  }`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                  <span className="relative z-10 tracking-wide drop-shadow-md">{cat}</span>
+                </button>
+              ))}
+            </div>
 
-      {/* Horizontal Scroll Section */}
-      <section ref={containerRef} className="relative bg-[#0a0a0a]" style={{ height: `calc(100vh + ${Math.abs(scrollRange)}px)` }}>
-        <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden pt-[92px]">
-          
-          {/* Categories Filter */}
-          <div className="w-full px-8 md:px-[60px] mb-8 md:mb-12 flex items-center gap-4 overflow-x-auto no-scrollbar relative z-10">
-            {allCategories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
-                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border flex-shrink-0 ${
-                  activeFilter === cat 
-                    ? 'border-white bg-white text-[#0a0a0a]' 
-                    : 'border-[#7a7a7a] text-[#888888] hover:border-white hover:text-white bg-transparent'
-                }`}
+            <div className="w-full h-[65vh] md:h-[75vh]">
+              <motion.div 
+                ref={trackRef}
+                style={{ x: mapScrollToX }} 
+                className="flex gap-16 px-8 md:px-[60px] items-center h-full w-max"
               >
-                {cat}
-              </button>
+                {filteredProjects.map((proj, idx) => (
+                    <ProjectCard key={proj.title} project={proj} index={idx} />
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Old Projects */}
+        <section className="w-full max-w-[1440px] mx-auto mt-20 md:mt-40 pb-32 px-8 md:px-[60px] bg-[#0a0a0a]">
+          <div className="border-t border-white/10 pt-6 mb-8">
+            <h2 className="font-sans font-semibold text-[18px] text-[#888888]">
+              // Old projects
+            </h2>
+          </div>
+
+          <div className="flex flex-col">
+            {oldProjects.map((op, i) => (
+              <div 
+                key={i} 
+                className="group relative flex flex-col md:flex-row justify-between items-start md:items-center py-6 px-4 border-b border-white/10 overflow-hidden cursor-pointer hover:bg-[#161616] transition-colors duration-300 rounded-lg"
+              >
+                <div className="relative z-10 flex items-center gap-6 w-full md:w-1/3">
+                  <span className="font-sans font-semibold text-[20px] text-white group-hover:text-[#ff6b4a] transition-colors duration-300">
+                    {op.name}
+                  </span>
+                  <span className="font-dm text-[16px] text-[#888888] group-hover:text-white/80 transition-colors duration-300">
+                    ({op.year})
+                  </span>
+                </div>
+                
+                <div className="relative z-10 w-full md:w-1/3 text-left md:text-center mt-2 md:mt-0">
+                  <span className="font-sans text-[18px] text-[#888888] group-hover:text-white transition-colors duration-300">
+                    {op.category}
+                  </span>
+                </div>
+
+                <div className="relative z-10 w-full md:w-1/3 text-left md:text-right mt-2 md:mt-0">
+                  <span className="font-dm text-[16px] text-[#888888] group-hover:text-white transition-colors duration-300">
+                    {op.id}
+                  </span>
+                </div>
+              </div>
             ))}
           </div>
+        </section>
 
-          <div className="w-full h-[65vh] md:h-[75vh]">
-            <motion.div 
-              ref={trackRef}
-              style={{ x: mapScrollToX }} 
-              className="flex gap-16 px-8 md:px-[60px] items-center h-full w-max"
-            >
-               {filteredProjects.map((proj, idx) => (
-                  <ProjectCard key={proj.title} project={proj} index={idx} />
-               ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Old Projects */}
-      <section className="w-full max-w-[1440px] mx-auto mt-20 md:mt-40 pb-32 px-8 md:px-[60px] bg-[#0a0a0a]">
-        <div className="border-t border-white/10 pt-6 mb-8">
-          <h2 className="font-sans font-semibold text-[18px] text-[#888888]">
-            // Old projects
-          </h2>
-        </div>
-
-        <div className="flex flex-col">
-          {oldProjects.map((op, i) => (
-            <div 
-              key={i} 
-              className="group relative flex flex-col md:flex-row justify-between items-start md:items-center py-6 px-4 border-b border-white/10 overflow-hidden cursor-pointer hover:bg-[#161616] transition-colors duration-300 rounded-lg"
-            >
-              <div className="relative z-10 flex items-center gap-6 w-full md:w-1/3">
-                <span className="font-sans font-semibold text-[20px] text-white group-hover:text-[#ff6b4a] transition-colors duration-300">
-                  {op.name}
-                </span>
-                <span className="font-dm text-[16px] text-[#888888] group-hover:text-white/80 transition-colors duration-300">
-                  ({op.year})
-                </span>
-              </div>
-              
-              <div className="relative z-10 w-full md:w-1/3 text-left md:text-center mt-2 md:mt-0">
-                <span className="font-sans text-[18px] text-[#888888] group-hover:text-white transition-colors duration-300">
-                  {op.category}
-                </span>
-              </div>
-
-              <div className="relative z-10 w-full md:w-1/3 text-left md:text-right mt-2 md:mt-0">
-                <span className="font-dm text-[16px] text-[#888888] group-hover:text-white transition-colors duration-300">
-                  {op.id}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </PageTransition>
   );
 }
 
 // Project Card with the exact same padding container design as the Home page
 function ProjectCard({ project, index }: { project: any, index: number }) {
-  const [hovering, setHovering] = useState(false);
-  const projectId = project.title.toLowerCase().replace(/\s+/g, '-');
-
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  
-  const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    cursorX.set(e.clientX - rect.left - 48);
-    cursorY.set(e.clientY - rect.top - 48);
-  };
+  const projectId = project.id;
 
   return (
     <Link to={`/projects/${projectId}`} className="w-[90vw] md:w-[80vw] xl:w-[1300px] h-[65vh] md:h-[75vh] flex-shrink-0 block">
@@ -184,36 +162,16 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
         {/* Image Container */}
         <div 
           className="w-full lg:flex-1 h-[40vh] lg:h-full relative rounded-[16px] border border-[#7a7a7a] overflow-hidden cursor-none"
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
-          onMouseMove={handleMouseMove}
+          data-cursor-text="View"
         >
           <motion.img 
             initial={{ scale: 1 }}
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            src={project.imgSrc}
+            src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
-          
-          {/* Custom Mouse Cursor */}
-          <AnimatePresence>
-            {hovering && (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5 }}
-                transition={{ duration: 0.2 }}
-                style={{ x: cursorXSpring, y: cursorYSpring }}
-                className="absolute left-0 top-0 pointer-events-none z-50"
-              >
-                <div className="w-24 h-24 bg-[#ff6b4a] text-white rounded-full flex items-center justify-center text-lg font-medium tracking-wide shadow-xl">
-                  View
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
 
         {/* Text Container */}

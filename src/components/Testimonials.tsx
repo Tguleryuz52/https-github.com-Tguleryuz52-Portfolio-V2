@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
 import { Container, SectionSubtitle } from './ui/Layout';
 
-const quotePart1 = `"His keen eye for detail and innovative approach`.split(" ");
-const quotePart2 = `impressed our team, turning challenges into creative solutions that set him apart."`.split(" ");
+const quotePart1 = `"Tasarım vizyonu, detaylara olan keskin hakimiyeti ve mühendislik yaklaşımı`.split(" ");
+const quotePart2 = `ekibimizi derinden etkiledi; en karmaşık zorlukları bile şaşırtıcı çözümlere dönüştürdü."`.split(" ");
 
 const allWords = [
   ...quotePart1.map(w => ({ text: w, accent: false })),
@@ -19,7 +19,7 @@ interface WordProps {
 
 const Word = ({ children, progress, range, isAccent }: WordProps) => {
   const whiteRange = ["rgba(255, 255, 255, 0.2)", "rgba(255, 255, 255, 1)"];
-  const orangeRange = ["rgba(255, 87, 51, 0.2)", "rgba(240, 68, 56, 1)"]; // Matches brand-accent roughly
+  const orangeRange = ["rgba(229, 57, 53, 0.2)", "rgba(229, 57, 53, 1)"]; // Matches #e53935
 
   const color = useTransform(progress, range, isAccent ? orangeRange : whiteRange);
   
@@ -40,7 +40,7 @@ export function Testimonials() {
 
   return (
     <section ref={containerRef} className="h-[100dvh] w-full flex flex-col justify-center border-t border-white/10 relative overflow-hidden bg-[#0a0a0a]">
-      <SectionSubtitle>Testimonials</SectionSubtitle>
+      <SectionSubtitle>Referanslar</SectionSubtitle>
 
       <Container className="relative h-full flex flex-col justify-center">
         
@@ -73,8 +73,8 @@ export function Testimonials() {
 
              {/* Author Info */}
              <div className="mt-12 lg:mt-16">
-                <div className="font-sans text-white text-base md:text-lg font-medium mb-1">// Maya Lopez</div>
-                <div className="text-white/40 text-sm md:text-base">CEO, Fundwizz</div>
+                <div className="font-sans text-white text-base md:text-lg font-medium mb-1">// Sarah Connor</div>
+                <div className="text-white/40 text-sm md:text-base">Creative Director, Cyberdyne</div>
              </div>
           </div>
 

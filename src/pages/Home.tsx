@@ -5,19 +5,22 @@ import { Projects } from '../components/Projects';
 import { Testimonials } from '../components/Testimonials';
 import { Marquee } from '../components/Marquee';
 import { Footer } from '../components/Footer';
+import { PageTransition } from '../components/PageTransition';
 
 export function Home() {
   return (
-    <div className="bg-bg-dark text-white min-h-screen font-sans selection:bg-brand-accent selection:text-white">
-      <main>
-        <Hero />
-        <Intro />
-        <Services />
-        <Projects />
-        <Testimonials />
-        <Marquee />
-      </main>
-      <Footer />
-    </div>
+    <PageTransition>
+      <div className="bg-bg-dark text-white min-h-screen font-sans selection:bg-brand-accent selection:text-white">
+        <main>
+          <Hero />
+          <Intro />
+          <Services />
+          <Projects />
+          <Testimonials />
+          <Marquee />
+        </main>
+        <Footer />
+      </div>
+    </PageTransition>
   );
 }

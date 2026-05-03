@@ -3,36 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSp
 import { Link } from 'react-router-dom';
 import { Container, SectionSubtitle } from './ui/Layout';
 
-const projects = [
-  {
-    year: "2024",
-    title: "Formula Vintage",
-    desc: "For Formula Vintage, we crafted a design that honors the rich heritage of classic cars while adding a modern twist. Combining timeless elegance with sleek, contemporary elements, we created an experience that appeals to both enthusiasts and newcomers, celebrating the past with a fresh perspective.",
-    tags: ["Landing Page", "Mobile App", "Redesign"],
-    image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=2264&auto=format&fit=crop"
-  },
-  {
-    year: "2024",
-    title: "Sprey Zest",
-    desc: "For Sprey Zest, we took a playful, bold approach to packaging and branding. Instead of following the typical fresh or clean aesthetic, we infused energy and personality into every detail, making the product stand out on shelves and bringing a burst of excitement to the consumer experience.",
-    tags: ["Website Design", "Branding"],
-    image: "https://images.unsplash.com/photo-1611078489935-0cb964de46d6?q=80&w=2274&auto=format&fit=crop"
-  },
-  {
-    year: "2020",
-    title: "Super Pro",
-    desc: "For Super-Pro, we redefined what it means to be a professional by focusing on the mindset and determination behind success, not just the achievements. The design highlighted the drive and passion of athletes, creating a bold, empowering experience that resonated with anyone striving for excellence.",
-    tags: ["Desktop App", "Mobile App"],
-    image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=2340&auto=format&fit=crop"
-  },
-  {
-    year: "2024",
-    title: "Architech Buildings",
-    desc: "We redefined the concept of modern living by creating a design that challenges conventional boundaries. Focusing on comfort, functionality, and unexpected elements, we transformed the ordinary into something extraordinary, making everyday experiences feel fresh and unique.",
-    tags: ["Mobile App", "Branding", "Website Design"],
-    image: "https://images.unsplash.com/photo-1512498559096-736b0de318f7?q=80&w=2609&auto=format&fit=crop"
-  }
-];
+import { projects } from '../data/projects';
 
 interface ProjectCardProps {
   project: typeof projects[0];
@@ -65,7 +36,7 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
     cursorY.set(e.clientY - rect.top - 48);
   };
 
-  const projectId = project.title.toLowerCase().replace(/\s+/g, '-');
+  const projectId = project.id;
 
   return (
     <Link to={`/projects/${projectId}`} className="sticky top-0 h-[100dvh] w-full flex items-center justify-center p-4 pt-16 md:p-8 md:pt-24 lg:p-12 lg:pt-28 xl:p-16 xl:pt-32 cursor-pointer block">
@@ -89,7 +60,7 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
               transition={{ duration: 0.8, ease: "easeOut" }}
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-center"
             />
             
             {/* Custom Mouse Cursor */}
@@ -157,7 +128,7 @@ export function Projects() {
 
   return (
     <section ref={containerRef} className="relative bg-[#0a0a0a] pb-24 pt-24 border-t border-white/10">
-      <SectionSubtitle>Projects</SectionSubtitle>
+      <SectionSubtitle>Projeler</SectionSubtitle>
 
       {/* Kartlar yapışkan ve üst üste biner */}
       <div className="relative w-full">

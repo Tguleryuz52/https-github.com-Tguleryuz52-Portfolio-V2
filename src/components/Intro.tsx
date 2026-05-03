@@ -4,12 +4,12 @@ import { TextReveal } from './ui/TextReveal';
 import { useRef } from 'react';
 
 const words = [
-  { text: "I'm" }, { text: "a" }, { text: "versatile" }, { text: "designer", accent: true }, { text: "who", accent: true },
-  { text: "partners", accent: true }, { text: "with", accent: true }, { text: "founders", accent: true },
-  { text: "to", accent: true }, { text: "turn", accent: true }, { text: "ideas", accent: true }, { text: "into", accent: true },
-  { text: "real", accent: true }, { text: "products.", accent: true }, { text: "I" },
-  { text: "focus" }, { text: "on" }, { text: "clear" }, { text: "interfaces," },
-  { text: "sharp" }, { text: "decisions," }, { text: "and" }, { text: "fast" }, { text: "execution." }
+  { text: "Ben," }, { text: "fikirleri" }, { text: "gerçek", accent: true }, { text: "ürünlere", accent: true }, { text: "dönüştüren", accent: true },
+  { text: "vizyoner" }, { text: "bir" }, { text: "Tasarım", accent: true },
+  { text: "Mühendisi", accent: true }, { text: "ve", accent: true }, { text: "3D", accent: true }, { text: "Sanatçısıyım.", accent: true },
+  { text: "Kusursuz", accent: true }, { text: "arayüzlere,", accent: true }, { text: "cesur", accent: true },
+  { text: "kararlara", accent: true }, { text: "ve", accent: true }, { text: "hızlı", accent: true }, { text: "uygulamaya" },
+  { text: "odaklanıyorum." }
 ];
 
 interface WordProps {
@@ -35,7 +35,7 @@ const Word = ({ children, progress, range, isAccent }: WordProps) => {
       {/* Foreground filled word */}
       <motion.span 
         style={{ opacity }} 
-        className={`absolute left-0 top-0 ${isAccent ? "text-brand-accent" : "text-white"}`}
+        className={`absolute left-0 top-0 ${isAccent ? "text-[#e53935]" : "text-white"}`}
       >
         {children}
       </motion.span>
@@ -59,7 +59,7 @@ export function Intro() {
 
   return (
     <section id="about" className="py-24 md:py-48 relative border-t border-white/10">
-      <SectionSubtitle>Intro</SectionSubtitle>
+      <SectionSubtitle>Hakkımda</SectionSubtitle>
       <Container>
         
         <div className="flex flex-col relative" ref={containerRef}>
@@ -87,15 +87,15 @@ export function Intro() {
             <div className="w-full max-w-[450px] text-left px-4 md:px-0">
               <motion.div style={{ opacity: pOpacity, y: pY }}>
                 <TextReveal 
-                  text="Bringing your vision to life quickly and efficiently—whether it's branding, apps, or websites—I've got it covered, delivering smooth and effective solutions from start to finish."
-                  className="text-text-muted text-sm md:text-base leading-relaxed mb-8"
+                  text="Vizyonunuzu hızla ve etkili bir şekilde hayata geçiriyorum. İster hiper-gerçekçi 3D evrenler, ister kompleks web uygulamaları olsun; fikir aşamasından kusursuz bir lansmana kadar her adımı eksiksiz yönetiyorum."
+                  className="text-[#888888] text-sm md:text-base leading-relaxed mb-8"
                 />
                 
                 <a 
                   href="#projects" 
                   className="inline-flex py-3 px-8 border border-white/20 rounded-full hover:bg-white hover:text-black transition-colors duration-300 font-medium text-sm md:text-base"
                 >
-                  See my Work
+                  Projeleri İncele
                 </a>
               </motion.div>
             </div>

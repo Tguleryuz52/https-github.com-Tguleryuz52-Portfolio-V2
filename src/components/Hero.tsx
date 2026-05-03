@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate } from 'motion/react';
 import { Linkedin, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -14,29 +14,82 @@ const BehanceIcon = ({ className }: { className?: string }) => (
 export function Hero() {
   const { scrollY } = useScroll();
 
-  // Yatay kayma (Horizontal Marquee on Scroll)
-  // Ekran aşağı kaydıkça yazı sola doğru sürekli akacak.
+  // Mouse Tracking for Liquid Reveal
+  const mouseX = useMotionValue(-1000);
+  const mouseY = useMotionValue(-1000);
+  
+  // Smooth out the mouse movement for a natural fluid feel
+  const smoothMouseX = useSpring(mouseX, { damping: 30, stiffness: 200, mass: 0.5 });
+  const smoothMouseY = useSpring(mouseY, { damping: 30, stiffness: 200, mass: 0.5 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
+  };
+
+  const handleMouseLeave = () => {
+    // Hide the liquid pool when mouse leaves the screen
+    mouseX.set(-1000);
+    mouseY.set(-1000);
+  };
+
+  // Horizontal Marquee on Scroll
   const textX = useTransform(scrollY, [0, 1000], ["0%", "-15%"]); 
   
-  // Fotoğrafın hafif dikey kayması (Parallax)
+  // Parallax Image Scroll
   const imageY = useTransform(scrollY, [0, 1000], ["0%", "8%"]); 
 
-  // Talha Guleryuz - Talha Guleryuz - ... şeklinde yan yana şerit text oluşturmak için dizi kullanıyoruz.
-  const marqueeItems = Array(20).fill("Talha Guleryuz");
+  const marqueeItems = Array(20).fill("Talha Güleryüz");
 
   return (
-    <section className="relative h-[100dvh] min-h-[600px] w-full bg-[#E8E8E8] overflow-hidden font-sans z-0">
+    <section 
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative h-[100dvh] min-h-[600px] w-full bg-[#E8E8E8] overflow-hidden font-sans z-0"
+    >
+      {/* SVG Liquid Displacement Filter Definition */}
+      <svg width="0" height="0" className="absolute hidden">
+        <filter id="liquid" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves="1" result="noise">
+            <animate attributeName="baseFrequency" values="0.004;0.006;0.004" dur="8s" repeatCount="indefinite" />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G" edgeMode="duplicate" />
+        </filter>
+      </svg>
       
-      {/* Centered Portrait Image */}
+      {/* Centered Base Portrait Image */}
       <motion.div 
         style={{ y: imageY }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90vw] md:w-[45vw] h-[85vh] md:h-[90vh] z-10 border-b-0"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90vw] md:w-[45vw] h-[85vh] md:h-[90vh] z-10 border-b-0 pointer-events-none"
       >
         <img 
           src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
           alt="Portrait" 
           className="w-full h-full object-cover object-top grayscale contrast-125 brightness-95"
         />
+      </motion.div>
+
+      {/* Liquid Distorted Masked Layer */}
+      {/* This layer perfectly overlaps the base image, but has a strong water ripple filter.
+          It is masked by a radial gradient that follows the mouse, acting like a "water flashlight". */}
+      <motion.div
+        className="absolute inset-0 z-15 pointer-events-none"
+        style={{
+          WebkitMaskImage: useMotionTemplate`radial-gradient(circle 250px at ${smoothMouseX}px ${smoothMouseY}px, black 0%, transparent 100%)`,
+          maskImage: useMotionTemplate`radial-gradient(circle 250px at ${smoothMouseX}px ${smoothMouseY}px, black 0%, transparent 100%)`,
+        }}
+      >
+        <motion.div 
+          style={{ y: imageY }}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90vw] md:w-[45vw] h-[85vh] md:h-[90vh] border-b-0"
+        >
+          <img 
+            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
+            alt="Portrait Liquid" 
+            className="w-full h-full object-cover object-top scale-[1.03] transition-transform duration-700"
+            style={{ filter: 'grayscale(100%) contrast(1.25) brightness(0.95) url(#liquid)' }}
+          />
+        </motion.div>
       </motion.div>
 
       {/* Marquee Text Layer (mix-blend-difference) */}
@@ -60,9 +113,8 @@ export function Hero() {
         </motion.div>
       </div>
 
-
       {/* Bottom Elements */}
-      <div className="absolute bottom-0 left-0 w-full flex flex-row justify-between items-end p-6 md:p-8 z-30 text-white mix-blend-difference">
+      <div className="absolute bottom-0 left-0 w-full flex flex-row justify-between items-end p-6 md:p-8 z-30 text-white mix-blend-difference pointer-events-none">
         
         {/* Social Links (Sol Alt) */}
         <div className="flex flex-col gap-5 font-semibold pointer-events-auto">
@@ -87,8 +139,8 @@ export function Hero() {
         </div>
 
         {/* Role Title (Sağ Alt) */}
-        <div className="text-right text-[8vw] md:text-[4vw] font-display font-medium leading-[0.95] tracking-[-0.04em] pb-1">
-           Web Designer<br/>Art Director
+        <div className="text-right text-[7vw] md:text-[3.5vw] font-display font-medium leading-[0.95] tracking-[-0.02em] pb-1">
+           Tasarım Mühendisi<br/>3D Sanatçısı
         </div>
 
       </div>
