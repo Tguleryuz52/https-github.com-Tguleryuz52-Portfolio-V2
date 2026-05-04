@@ -18,8 +18,10 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
   const start = isLast ? 0 : index * (1 / (total - 1));
   const end = isLast ? 1 : (index + 1) * (1 / (total - 1));
 
-  const scale = useTransform(progress, [start, end], [1, isLast ? 1 : 0.92]);
-  const overlayOpacity = useTransform(progress, [start, end], [0, isLast ? 0 : 0.6]);
+  // Geliştirilmiş 3D efektleri (Küçülme, geriye doğru yatma ve yukarı kayma)
+  const scale = useTransform(progress, [start, end], [1, isLast ? 1 : 0.88]);
+  const rotateX = useTransform(progress, [start, end], [0, isLast ? 0 : 10]);
+  const y = useTransform(progress, [start, end], ["0%", isLast ? "0%" : "-8%"]);
 
   const [hovering, setHovering] = useState(false);
 
@@ -39,13 +41,18 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
   const projectId = project.id;
 
   return (
-    <Link to={`/projects/${projectId}`} className="sticky top-0 h-[100dvh] w-full flex items-center justify-center p-4 pt-16 md:p-8 md:pt-24 lg:p-12 lg:pt-28 xl:p-16 xl:pt-32 cursor-pointer block">
+    <Link to={`/projects/${projectId}`} className="sticky top-0 h-[100dvh] w-full flex items-center justify-center p-4 pt-16 md:p-8 md:pt-24 lg:p-12 lg:pt-28 xl:p-16 xl:pt-32 cursor-pointer block" style={{ perspective: "1500px" }}>
       <motion.div 
-        style={{ scale }}
-        className="relative w-full h-full max-w-[1800px] mx-auto origin-top"
+        style={{ scale, rotateX, y, transformOrigin: "top" }}
+        className="relative w-full h-full max-w-[1800px] mx-auto"
       >
-        {/* Padding Container (Main Card) - Birebir Framer CSS */}
-        <div className="w-full h-full flex flex-col lg:flex-row p-3 gap-[10px] bg-[#161616] rounded-[24px] border border-white/5 shadow-2xl">
+        {/* Padding Container (Main Card) - 3D and brighter */}
+        <div 
+          className="w-full h-full flex flex-col lg:flex-row p-3 gap-[10px] bg-gradient-to-b from-[#222222] to-[#161616] rounded-[24px] border border-white/10"
+          style={{
+            boxShadow: "0 40px 80px rgba(0,0,0,0.8), inset 0 2px 2px rgba(255,255,255,0.15), inset 0 -1px 2px rgba(0,0,0,0.5)"
+          }}
+        >
           
           {/* Image Container */}
           <div 
@@ -60,7 +67,7 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
               transition={{ duration: 0.8, ease: "easeOut" }}
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover object-center brightness-[1.05] contrast-[1.05]"
             />
             
             {/* Custom Mouse Cursor */}
@@ -92,7 +99,7 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
               {project.title}
             </h2>
             
-            <p className="text-[#a3a3a3] text-[15px] leading-[1.6]">
+            <p className="text-white/80 text-[15px] leading-[1.6]">
               {project.desc}
             </p>
 
@@ -100,18 +107,12 @@ function ProjectCard({ project, index, total, progress }: ProjectCardProps) {
               {project.tags.map((tag: string, i: number) => (
                 <React.Fragment key={i}>
                   {i > 0 && <div className="h-[1px] w-full bg-white/10 my-4" />}
-                  <div className="text-[15px] text-[#a3a3a3]">{tag}</div>
+                  <div className="text-[15px] text-white/80">{tag}</div>
                 </React.Fragment>
               ))}
             </div>
           </div>
         </div>
-
-        {/* Stacking Overlay (Karanlık Katman) */}
-        <motion.div 
-          style={{ opacity: overlayOpacity }}
-          className="absolute inset-0 bg-black pointer-events-none z-10 rounded-[24px]"
-        />
       </motion.div>
     </Link>
   );

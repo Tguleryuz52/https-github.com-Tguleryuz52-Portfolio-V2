@@ -38,7 +38,7 @@ export function Footer() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] md:w-[45vw] h-[85vh] md:h-[90vh] z-10 overflow-hidden pointer-events-none flex justify-center items-center">
           <motion.img 
             style={{ scale: imageScale }}
-            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=2454&auto=format&fit=crop" 
+            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
             alt="Portrait" 
             className="w-full h-full object-cover grayscale contrast-125 brightness-95 transform-gpu"
           />
